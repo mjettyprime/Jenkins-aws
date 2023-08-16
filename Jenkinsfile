@@ -14,7 +14,12 @@ pipeline {
         stage('Retrieve AWS Credentials') {
             steps {
                 script {
-                    withAWSs([string(credentialsId: 'AWS', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'AWS', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                   withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: 'AWS',
+            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
                         sh '''
                             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
                             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
