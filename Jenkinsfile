@@ -7,7 +7,7 @@ pipeline {
     
     environment {
         AWS_REGION = 'us-east-2'
-        AWS_SECRET_NAME = 'Jenkins-Aws'
+        AWS_SECRET_NAME = 'AWS'
     }
     
     stages {
