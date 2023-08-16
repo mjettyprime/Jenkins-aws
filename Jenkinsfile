@@ -36,7 +36,7 @@ pipeline {
                         script: "aws secretsmanager get-secret-value --secret-id ${AWS_SECRET_NAME} --region ${AWS_REGION}",
                         returnStdout: true
                     ).trim()
-                    def secretJson = readJSON(text: awsSecret)
+                    def secretJson = jsonParse(text: awsSecret)
                     def secretValue = secretJson.SecretString
                     sh 'echo ${secretvalue}'
                 }
