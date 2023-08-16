@@ -7,15 +7,15 @@ pipeline {
     
     environment {
         AWS_REGION = 'us-east-2'
-        AWS_SECRET_NAME = 'AWS'
+        AWS_SECRET_NAME = 'pyama-secret'
     }
     
     stages {
         stage('Retrieve AWS Credentials') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'Jenkins-aws', variable: 'AWS_ACCESS_KEY_ID'),
-                                     string(credentialsId: 'Jenkins-aws', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    withCredentials([string(credentialsId: 'AWS', variable: 'AWS_ACCESS_KEY_ID'),
+                                     string(credentialsId: 'AWS', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh '''
                             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
                             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
