@@ -32,13 +32,9 @@ pipeline {
         stage('Retrieve AWS Secret') {
             steps {
                 script {
-                    def awsSecret = sh(
-                        script: "aws secretsmanager get-secret-value --secret-id ${AWS_SECRET_NAME} --region ${AWS_REGION}",
-                        returnStdout: true
-                    ).trim()
-                    
-                    def secretValue = secretJson.SecretString
-                    sh 'echo ${secretvalue}'
+                   SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME --region $AWS_REGION --output text --query 'SecretString')
+                   sh 'echo ${SECRET_VALUE}'
+'
                 }
             }
         }
