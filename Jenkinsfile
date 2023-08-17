@@ -34,7 +34,7 @@ pipeline {
                 script {
                    def SECRET_VALUE= sh(script: "aws secretsmanager get-secret-value --secret-id ${AWS_SECRET_NAME} --region ${AWS_REGION}",
                         returnStdout: true).trim()
-                   sh 'echo ${SECRET_VALUE}'
+                   sh "echo ${SECRET_VALUE}"
                 }
             }
         }
